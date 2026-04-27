@@ -53,7 +53,20 @@ flowchart TD
     A --> C[Create Listing]
 ```
 
-## 5. Community
+## 5. Club Membership
+
+```mermaid
+flowchart TD
+    H[Club Head / Admin] -->|Sets user.clubId<br/>status=pending| U[User]
+    U --> P[Pending List<br/>on Club Detail]
+    P --> A{Head Reviews}
+    A -->|Approve| AC[status=active<br/>✅ Member]
+    A -->|Reject| RJ[clubId=null<br/>status=active]
+```
+
+Stored on `users/{uid}` → `clubId` + `status`. No public Join button — head/admin invites, head approves.
+
+## 6. Community
 
 ```mermaid
 flowchart TD
@@ -68,7 +81,7 @@ flowchart TD
     AR --> WR[Write Article]
 ```
 
-## 6. Chat
+## 7. Chat
 
 ```mermaid
 flowchart LR
@@ -76,7 +89,7 @@ flowchart LR
     TH --> SE[Send Message]
 ```
 
-## 7. Profile
+## 8. Profile
 
 ```mermaid
 flowchart TD
@@ -87,7 +100,7 @@ flowchart TD
     P --> SR[🔍 Search]
 ```
 
-## 8. Roles & Gates
+## 9. Roles & Gates
 
 ```mermaid
 flowchart LR
