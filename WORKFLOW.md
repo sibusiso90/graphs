@@ -57,14 +57,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    H[Club Head / Admin] -->|Sets user.clubId<br/>status=pending| U[User]
-    U --> P[Pending List<br/>on Club Detail]
-    P --> A{Head Reviews}
-    A -->|Approve| AC[status=active<br/>✅ Member]
-    A -->|Reject| RJ[clubId=null<br/>status=active]
+    U[User on Club Detail] -->|Apply to Join| AP[clubId=X<br/>status=pending]
+    H[Club Head] -.Invite.-> AP
+    AP --> P[Pending List]
+    P --> R{Head Reviews}
+    R -->|Approve| AC[status=active<br/>✅ Member]
+    R -->|Reject| RJ[clubId=null<br/>status=active]
+    AP -.User cancels.-> RJ
+    AC -.User leaves.-> RJ
 ```
 
-Stored on `users/{uid}` → `clubId` + `status`. No public Join button — head/admin invites, head approves.
+Stored on `users/{uid}` → `clubId` + `status`. Either the user applies or the head invites; only the head/admin can flip `pending → active`.
 
 ## 6. Community
 
